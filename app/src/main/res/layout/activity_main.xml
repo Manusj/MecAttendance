@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#00695c"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.mecattendance.MainActivity"
+    android:layout_margin="18dp"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/mec"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MEC Attendance"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:textSize="24sp"/>
+
+    <RadioGroup
+        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/clas">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#B2DFDB"
+            android:textSize="16sp"
+            android:text="Computer Science"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#B2DFDB"
+            android:layout_height="wrap_content"
+            android:text="Electronics and Communication"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#B2DFDB"
+            android:text="Electrical"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#B2DFDB"
+            android:text="Biomedical"/>
+    </RadioGroup>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:id="@+id/div"
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#B2DFDB"
+                android:text="A"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#B2DFDB"
+                android:textSize="16sp"
+                android:text="B"/>
+        </RadioGroup>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/prompt"
+        android:textColor="#B2DFDB"
+        android:id="@+id/sem"
+        android:layout_weight="1"
+        android:entries="@array/sem"
+        android:padding="8dp"
+        />
+
+    </LinearLayout>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Roll Number"
+        android:textColorHint="#B2DFDB"
+        android:textColor="#B2DFDB"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/roll"
+        android:layout_gravity="center"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_marginTop="64dp"
+        android:layout_width="128dp"
+        android:layout_height="64dp"
+        android:id="@+id/button1"
+        android:text="submit"
+        android:textColor="#00695c"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+</LinearLayout>
+
+
+</ScrollView>

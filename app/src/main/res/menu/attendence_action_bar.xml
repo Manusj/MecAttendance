@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:abc="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_timetable"
+        android:icon="@drawable/ic_event_white_24dp"
+        android:title="Timetable"
+        abc:showAsAction="always" />
+    <item android:id="@+id/update"
+        android:title="Update"
+        abc:showAsAction="never"/>
+    <item android:id="@+id/credits"
+        android:title="Credits"
+        abc:showAsAction="never"/>
+
+</menu>

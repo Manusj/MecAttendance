@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dbdbdb"
+    >
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tuesday"
+        android:layout_margin="8dp"
+        android:layout_weight="2"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp"
+        />
+
+</LinearLayout>
+
