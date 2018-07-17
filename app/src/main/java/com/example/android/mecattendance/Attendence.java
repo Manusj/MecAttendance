@@ -56,44 +56,6 @@ public class Attendence extends AppCompatActivity {
     int nsub;
     Document document;
 
-    String getcode()  //Get ur class roll as in website eg: CSU 152 33
-    {
-
-        String code=null;
-//        Intent intent = getIntent();
-//        String cla = intent.getStringExtra("cla");
-        SharedPreferences p = getApplicationContext().getSharedPreferences("Student",MODE_PRIVATE);
-        String cla=p.getString("cla",null);
-        int year = Integer.parseInt(p.getString("year",null))%1000;    //get your year part of your roll number  intent.getStringExtra("year")
-        switch (cla)
-        {
-            case "C":code="CSU "+Integer.toString(year);
-//                String div=intent.getStringExtra("div");
-                String div=p.getString("div",null);
-                if(div.equals("A"))
-                    code+="1 ";
-                else
-                    code+="2 ";
-                break;
-            case "E":code="ECU "+Integer.toString(year);
-//                div=intent.getStringExtra("div");
-                div=p.getString("div",null);
-                if(div.equals("A"))
-                    code+="1 ";
-                else
-                    code+="2 ";
-                break;
-            case "B":code="EBU "+Integer.toString(year)+" ";
-                break;
-            case "EE":code="EEU "+Integer.toString(year)+" ";
-                break;
-        }
-        Log.v("Code in function",code);
-        return code;
-    }
-
-
-
     void get_subjectcode(Document doc)    //get mydetails and the subject codes
     {
         nsub=0;
