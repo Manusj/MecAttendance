@@ -58,39 +58,42 @@ public class Attendence extends AppCompatActivity {
 
     void get_subjectcode(Document doc)    //get mydetails and the subject codes
     {
-        nsub=0;
-        int star,end;
+        nsub = 0;
+        int star, end;
         String text;
         org.jsoup.nodes.Element table = (org.jsoup.nodes.Element) doc.select("table").get(0);
-        Elements rows=table.select("tr");
+        Elements rows = table.select("tr");
         org.jsoup.nodes.Element row = rows.get(0);
-        Elements cols=row.select("td");
-        int i=2;
-        do {
+        Elements cols = row.select("td");
+        int i = 2;
+        try {
+            do {
 
-            org.jsoup.nodes.Element subcode = cols.get(i);
-            text=subcode.text();
-            if (text.equals("Total %"))
-                break;
-            else
-            {
-                star=0;
-                end=text.indexOf("(");
-                if(text.substring(star,end).equals("Spl. "))
+                org.jsoup.nodes.Element subcode = cols.get(i);
+                text = subcode.text();
+                if (text.equals("Total %"))
                     break;
                 else {
-                    sub[nsub] = text.substring(star, end);
-                    star = text.indexOf("(") + 1;
-                    end = text.indexOf(")");
-                    sub_hrs[nsub] = Integer.parseInt(text.substring(star, end));
-                    v("sub_code" + nsub, sub[nsub]);
-                    v("sub_hrs" + nsub, Integer.toString(sub_hrs[nsub]));
-                    nsub++;
-                }
+                    star = 0;
+                    end = text.indexOf("(");
+                    if (text.substring(star, end).equals("Spl. "))
+                        break;
+                    else {
+                        sub[nsub] = text.substring(star, end);
+                        star = text.indexOf("(") + 1;
+                        end = text.indexOf(")");
+                        sub_hrs[nsub] = Integer.parseInt(text.substring(star, end));
+                        v("sub_code" + nsub, sub[nsub]);
+                        v("sub_hrs" + nsub, Integer.toString(sub_hrs[nsub]));
+                        nsub++;
+                    }
 
-            }
-            i++;
-        }while (!text.equals("Total %"));
+                }
+                i++;
+            } while (!text.equals("Total %"));
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
 
     void get_subject_lastedit(Document doc)
@@ -130,7 +133,7 @@ public class Attendence extends AppCompatActivity {
             Log.v("Name", name);
             for (int i = 2; i < (nsub + 2); i++) {
                 org.jsoup.nodes.Element subper = cols.get(i);
-                if (subper.text().equals("Nil"))
+                if (subper.text().equals("Nil")||subper.text().equals("-"))
                     attn[i - 2] = 0;
                 else
                     attn[i - 2] = Float.valueOf(subper.text().trim()).floatValue();
@@ -241,16 +244,29 @@ public class Attendence extends AppCompatActivity {
 
                 nam = words.select("b").text();
                 SubjectTeacher = cols.get(j).text();
-                if(SubjectTeacher.equals(""))
+                try {
+                    if (SubjectTeacher.equals(""))
+                        TimeTable[i - 2][j - 1] = " ";
+                    else {
+                        s = SubjectTeacher.replace(nam, "");
+                        if (!SubjectTeacher.contains("Elective"))
+                            TimeTable[i - 2][j - 1] = s.substring(sub[0].length());
+                        else
+                            TimeTable[i - 2][j - 1] = s;
+                        Log.v("Subject", SubjectTeacher);
+                        if (SubjectTeacher.contains("Seminar"))
+                            TimeTable[i - 2][j - 1] = s.substring(sub[0].length() + 1);
+
+
+                    }
+                }catch (IndexOutOfBoundsException e)
+                {
                     TimeTable[i - 2][j - 1]=" ";
-                else {
-                    s = SubjectTeacher.replace(nam, "");
-
-                    TimeTable[i - 2][j - 1] = s.substring(sub[0].length());
-
-
                 }
-                editor.putString(Integer.toString((i * 10) + j), TimeTable[i - 2][j - 1]);
+                if(Character.isDigit(TimeTable[i - 2][j - 1].charAt(0)))
+                    editor.putString(Integer.toString((i * 10) + j), TimeTable[i - 2][j - 1].substring(2));
+                else
+                    editor.putString(Integer.toString((i * 10) + j), TimeTable[i - 2][j - 1]);
                 Log.v("TimeTable" + Integer.toString((i * 10) + j), TimeTable[i - 2][j - 1]);
 
             }
@@ -323,11 +339,11 @@ public class Attendence extends AppCompatActivity {
                     try {
                             doc = Jsoup.connect("http://attendance.mec.ac.in/view4stud.php").data("class", finalClas).data("submit", "view").get();
                         document=doc;
-                    } catch (IOException e) {
+                    } catch (final IOException e) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Log.v("Hello","Hello");
+                                Log.v("Hello",e.toString());
                                 //Toast.makeText(Attendence.this,"Connect to Internet",Toast.LENGTH_LONG).show();
                                 setContentView(R.layout.offline);
                                 Button refresh = (Button) findViewById(R.id.refresh);
